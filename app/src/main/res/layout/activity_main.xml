@@ -16,7 +16,7 @@
         android:padding="5dp"
         android:textColor="@color/colorPrimary"
         android:textSize="13sp"
-        app:highlightBackground="#08000000"
+        app:highlightBackground="#10000000"
         app:highlightColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
