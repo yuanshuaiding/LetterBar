@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -48,11 +47,11 @@ public class LetterBar extends View {
         this(context, null);
     }
 
-    public LetterBar(Context context, @Nullable AttributeSet attrs) {
+    public LetterBar(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public LetterBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public LetterBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         //获取属性
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LetterBar);

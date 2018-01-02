@@ -1,6 +1,10 @@
 # LetterBar
 一个用于Android的字母索引侧边条控件
+# 快速使用
 
+```
+compile 'com.eric.android.view:letterbar:1.0.2'
+```
 # 属性设置
 
 ```
