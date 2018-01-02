@@ -15,8 +15,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        letter_bar = findViewById(R.id.letter_bar);
         tv_letter = findViewById(R.id.tv_letter);
+        letter_bar = findViewById(R.id.letter_bar);
         letter_bar.setOnLetterChangeListener(new LetterBar.OnLetterChangeListner() {
             @Override
             public void onLetterChanged(String letter) {
