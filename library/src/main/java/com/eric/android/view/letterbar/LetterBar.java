@@ -79,6 +79,7 @@ public class LetterBar extends View {
             mLetters = new String[letters.size()];
             letters.toArray(mLetters);
         }
+        requestLayout();
         postInvalidate();
     }
 
