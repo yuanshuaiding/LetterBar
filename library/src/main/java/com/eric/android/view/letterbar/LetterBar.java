@@ -7,11 +7,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.eric.letterbar.R;
+
+import java.util.List;
 
 /**
  * author : Eric
@@ -23,13 +26,14 @@ import com.eric.letterbar.R;
 
 public class LetterBar extends View {
     private final Paint mPaint;
+    private int mLetterSpace;//文字间距
     private int mColor = Color.BLACK;
     private int mHighlightColor = Color.RED;
     private int mHighlightBackground = Color.TRANSPARENT;
     private float mSize = sp2px(14);
-
-    private static final String[] mLetters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"
+    public static final String[] ENGLISGH_LETTERS = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"
             , "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+    private String[] mLetters = ENGLISGH_LETTERS;
     private int mLetterIndex = -1;
 
     private boolean showHighlightBg;//显示高亮背景色
@@ -59,6 +63,7 @@ public class LetterBar extends View {
             mColor = typedArray.getColor(R.styleable.LetterBar_android_textColor, mColor);
             mHighlightColor = typedArray.getColor(R.styleable.LetterBar_highlightColor, mHighlightColor);
             mSize = typedArray.getDimensionPixelSize(R.styleable.LetterBar_android_textSize, (int) mSize);
+            mLetterSpace = typedArray.getDimensionPixelSize(R.styleable.LetterBar_letterSpace, 0);
             mHighlightBackground = typedArray.getColor(R.styleable.LetterBar_highlightBackground, mHighlightBackground);
             typedArray.recycle();
         }
@@ -67,6 +72,14 @@ public class LetterBar extends View {
         mPaint.setColor(mColor);
         mPaint.setTextSize(mSize);
         mPaint.setAntiAlias(true);
+    }
+
+    public void setLetters(List<String> letters) {
+        if (letters != null && !letters.isEmpty()) {
+            mLetters = new String[letters.size()];
+            letters.toArray(mLetters);
+        }
+        postInvalidate();
     }
 
     private float sp2px(int sp) {
@@ -78,7 +91,16 @@ public class LetterBar extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         //只需要测量一个字母所需的宽度即可,M较胖，就选它
         int letterWidth = (int) mPaint.measureText("M") + getPaddingLeft() + getPaddingRight();
-        setMeasuredDimension(letterWidth, heightMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int height = 0;
+        if (heightMode == MeasureSpec.EXACTLY) {
+            height = MeasureSpec.getSize(heightMeasureSpec);
+        } else if (heightMode == MeasureSpec.AT_MOST) {
+            //给定一个最小值
+            height = (int) (mLetters.length * (mSize + mLetterSpace) + getPaddingTop() + getPaddingBottom());
+        }
+        Log.d("letterbar_height", height + "");
+        setMeasuredDimension(letterWidth, height);
     }
 
     @Override

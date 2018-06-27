@@ -3,6 +3,7 @@
     <declare-styleable name="LetterBar">
         <attr name="android:textColor" />
         <attr name="android:textSize" />
+        <attr name="letterSpace" format="dimension" />
         <attr name="highlightColor" format="color" />
         <attr name="highlightBackground" format="color" />
     </declare-styleable>

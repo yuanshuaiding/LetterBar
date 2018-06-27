@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
     private LetterBar letter_bar;
     private TextView tv_letter;
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         tv_letter = findViewById(R.id.tv_letter);
         letter_bar = findViewById(R.id.letter_bar);
+        letter_bar.setLetters(Arrays.asList("A","B","C"));
         letter_bar.setOnLetterChangeListener(new LetterBar.OnLetterChangeListner() {
             @Override
             public void onLetterChanged(String letter) {
